@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 
 type Repository ={
   full_name: string;
@@ -11,6 +12,8 @@ export function Repos() {
     const response = await axios.get('https://api.github.com/users/diegohts/repos')
   
     return response.data;
+  }, {
+    staleTime: 1000 * 60 // 1 minute
   })
 
   return (
@@ -19,7 +22,9 @@ export function Repos() {
       {data?.map(repo => {
         return (
           <li key={repo.full_name}>
-            <strong>{repo.full_name}</strong>
+            <Link to={`repos/${repo.full_name}`}>
+                {repo.full_name}
+            </Link>
             <p>{repo.description}</p>
           </li>
         )

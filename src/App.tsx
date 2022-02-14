@@ -6,11 +6,11 @@ type Repository ={
 }
 
 function App() {
-  const { data } = useFetch<Repository[]>('https://api.github.com/users/diegohts/repos')
+  const { data: repositories } = useFetch<Repository[]>('https://api.github.com/users/diegohts/repos')
 
   return (
     <ul>
-      {data?.map(repo => {
+      {repositories?.map(repo => {
         return (
           <li key={repo.full_name}>
             <strong>{repo.full_name}</strong>
